@@ -208,7 +208,11 @@ module.exports = {
                     });
 
                     db.get(`SELECT service FROM services WHERE ID="${serviceNumberForPromise}" `, [], (err, row) => {
-                        resolve(row?.service);
+                        if (err) {
+                            throw err
+                        } else {
+                            resolve(row.service);
+                        }
                     });
 
                     db.close((err) => {
