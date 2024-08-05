@@ -210,8 +210,10 @@ module.exports = {
                     db.get(`SELECT service FROM services WHERE ID="${serviceNumberForPromise}" `, [], (err, row) => {
                         if (err) {
                             throw err
-                        } else {
+                        } else if (row) {
                             resolve(row.service);
+                        } else {
+                            resolve(row);
                         }
                     });
 
